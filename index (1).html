@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lalapan Ani Bohay | Pesan Online</title>
+<style>
+:root {
+  --green: #245b35;
+  --dark: #173c25;
+  --cream: #fff8e9;
+  --orange: #ed9b35;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #292d28;
+  background: #fffdf7;
+}
+header {
+  background: var(--green);
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.logo { font-size: 22px; font-weight: bold; }
+.logo span { color: #ffd27d; }
+nav { display: flex; gap: 16px; flex-wrap: wrap; }
+nav a { color: white; text-decoration: none; font-size: 14px; }
+.hero {
+  background: linear-gradient(120deg, #173c25, #367348);
+  color: white;
+  padding: 55px 7%;
+  text-align: center;
+}
+.hero h1 { font-size: clamp(30px, 5vw, 48px); margin: 10px 0; }
+.hero p { line-height: 1.8; }
+.hero a {
+  display: inline-block;
+  padding: 12px 20px;
+  background: var(--orange);
+  color: #222;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+section { padding: 38px 6%; }
+.heading { text-align: center; margin-bottom: 25px; }
+.heading h2 { color: var(--green); }
+.heading p { color: #777; }
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.card {
+  background: white;
+  border: 1px solid #eee8db;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px #00000008;
+}
+.food {
+  background: var(--cream);
+  height: 125px;
+  display: grid;
+  place-items: center;
+  font-size: 65px;
+}
+.card-content { padding: 16px; }
+.card h3 { margin: 0 0 8px; font-size: 17px; }
+.card p { color: #777; font-size: 13px; line-height: 1.5; min-height: 38px; }
+.price { color: var(--green); font-size: 18px; font-weight: bold; }
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+}
+.quantity button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--green);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+.quantity button:disabled { opacity: .35; cursor: not-allowed; }
+.qty-number { font-weight: bold; min-width: 20px; text-align: center; }
+.cart {
+  background: var(--cream);
+  border-radius: 18px;
+  max-width: 800px;
+  margin: auto;
+  padding: 24px;
+}
+.cart h2 { color: var(--green); margin-top: 0; }
+.cart-empty { color: #777; text-align: center; padding: 15px; }
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e8dfce;
+}
+.cart-item small { display: block; color: #777; margin-top: 5px; }
+.remove {
+  background: transparent;
+  border: none;
+  color: #b52d2d;
+  cursor: pointer;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green);
+  margin: 22px 0;
+}
+.field { margin: 15px 0; }
+.field label { display: block; margin-bottom: 7px; font-weight: bold; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9d5cb;
+  border-radius: 8px;
+  background: white;
+  font: inherit;
+}
+.field textarea { min-height: 75px; resize: vertical; }
+.checkout {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #20b65a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.checkout:disabled { opacity: .5; cursor: not-allowed; }
+.note { color: #777; font-size: 12px; line-height: 1.6; }
+.info {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  line-height: 1.8;
+  text-align: center;
+}
+.info a { color: var(--green); }
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 25px;
+  line-height: 1.8;
+}
+@media(max-width: 700px) {
+  header { padding: 16px 5%; }
+  .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  section { padding: 30px 4%; }
+  .card-content { padding: 12px; }
+  .food { height: 100px; font-size: 52px; }
+  .card h3 { font-size: 15px; }
+  .card p { font-size: 12px; }
+  .price { font-size: 16px; }
+  .cart { padding: 16px; }
+}
+@media(max-width: 350px) {
+  .menu-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🍗 Lalapan<span> Ani Bohay</span></div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#keranjang">Keranjang <span id="cart-count">0</span></a>
+    <a href="#lokasi">Lokasi</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Lalapan Ani Bohay, Sambal Mantap!</h1>
+  <p>Lauk lezat, nasi hangat, lalapan segar.<br>
+  Pilih menu favoritmu dan pesan langsung lewat WhatsApp.</p>
+  <a href="#menu">🍽️ Pilih Menu Sekarang</a>
+</div>
+
+<section id="menu">
+  <div class="heading">
+    <h2>Daftar Menu</h2>
+    <p>Pilih beberapa menu sekaligus dengan tombol + dan −.</p>
+    <small>Harga di bawah masih contoh dan bisa kamu ubah.</small>
+  </div>
+
+  <div class="menu-grid" id="menu-grid"></div>
+</section>
+
+<section id="keranjang">
+  <div class="cart">
+    <h2>🛒 Keranjang Pesanan</h2>
+    <div id="cart-items"></div>
+
+    <div class="total">
+      <span>Total Harga</span>
+      <span id="total">Rp0</span>
+    </div>
+
+    <h3>📝 Data Pemesan</h3>
+
+    <div class="field">
+      <label for="nama">Nama pemesan *</label>
+      <input id="nama" type="text" placeholder="Masukkan nama kamu"
+      autocomplete="name" required>
+    </div>
+
+    <div class="field">
+      <label for="jenis">Jenis pesanan *</label>
+      <select id="jenis">
+        <option value="Bungkus">Bungkus / Ambil sendiri</option>
+        <option value="Makan di tempat">Makan di tempat</option>
+        <option value="Diantar">Minta diantar (konfirmasi ongkir)</option>
+      </select>
+    </div>
+
+    <div class="field" id="alamat-field" hidden>
+      <label for="alamat">Alamat pengantaran *</label>
+      <textarea id="alamat" placeholder="Nama jalan, desa, patokan rumah"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="catatan">Catatan pesanan</label>
+      <textarea id="catatan" placeholder="Contoh: sambal dipisah, tidak pedas"></textarea>
+    </div>
+
+    <button class="checkout" id="checkout" disabled>
+      🟢 Checkout melalui WhatsApp
+    </button>
+    <p class="note">
+      WhatsApp akan terbuka dengan rincian pesanan yang sudah disusun.
+      Periksa kembali pesanan lalu tekan tombol Kirim di WhatsApp.
+      Pesanan belum terkirim sampai kamu menekan tombol tersebut.
+      Ongkir, jika ada, dikonfirmasi oleh penjual.
+    </p>
+  </div>
+</section>
+
+<section id="lokasi">
+  <div class="heading">
+    <h2>📍 Lokasi Warung</h2>
+  </div>
+  <div class="info">  
+    Jl. Prempatan Bajulm Ati, Umbulrejo, Gajahrejo,
+    Gedangan, Kabupaten Malang, Jawa Timur 65178.
+    <p>📱 WhatsApp: 0812-1676-2847</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=Jl+Prempatan+Bajulm+Ati+Umbulrejo+Gajahrejo+Gedangan+Malang"
+    target="_blank" rel="noopener">Buka Google Maps ↗</a>
+  </div>
+</section>
+
+<footer>
+  <strong>🍗 Lalapan Ani Bohay</strong><br>
+  Lezat, Bersahabat, dan Mengenyangkan.<br>
+  <small>© <span id="year"></span> Lalapan Ani Bohay</small>
+</footer>
+
+<script>
+const nomorWA = "6281216762847";
+
+const produk = [
+  { id: 1, nama: "Lalapan Ayam Goreng", harga: 15000,
+    deskripsi: "Ayam, nasi hangat, lalapan dan sambal.", emoji: "🍗" },
+  { id: 2, nama: "Lalapan Lele", harga: 12000,
+    deskripsi: "Lele goreng, nasi, lalapan dan sambal.", emoji: "🐟" },
+  { id: 3, nama: "Lalapan Bebek", harga: 22000,
+    deskripsi: "Bebek goreng, nasi dan sambal pilihan.", emoji: "🦆" },
+  { id: 4, nama: "Lalapan Ikan", harga: 17000,
+    deskripsi: "Ikan goreng, nasi hangat dan lalapan.", emoji: "🐠" },
+  { id: 5, nama: "Lalapan Telur", harga: 10000,
+    deskripsi: "Telur goreng, nasi dan sambal.", emoji: "🍳" },
+  { id: 6, nama: "Nasi Putih", harga: 5000,
+    deskripsi: "Nasi putih hangat tambahan.", emoji: "🍚" }
+];
+
+// Menyimpan jumlah masing-masing produk.
+const keranjang = {};
+
+const rupiah = angka =>
+  "Rp" + angka.toLocaleString("id-ID");
+
+function renderMenu() {
+  document.getElementById("menu-grid").innerHTML =
+    produk.map(p => `
+      <article class="card">
+        <div class="food">${p.emoji}</div>
+        <div class="card-content">
+          <h3>${p.nama}</h3>
+          <p>${p.deskripsi}</p>
+          <div class="price">${rupiah(p.harga)}</div>
+          <div class="quantity">
+            <button type="button" aria-label="Kurangi ${p.nama}"
+              onclick="ubahJumlah(${p.id}, -1)">−</button>
+            <span class="qty-number" id="qty-${p.id}">0</span>
+            <button type="button" aria-label="Tambah ${p.nama}"
+              onclick="ubahJumlah(${p.id}, 1)">+</button>
+          </div>
+        </div>
+      </article>
+    `).join("");
+}
+
+function ubahJumlah(id, perubahan) {
+  const jumlah = keranjang[id] || 0;
+  const berikutnya = jumlah + perubahan;
+
+  if (berikutnya < 0) return;
+
+  if (berikutnya === 0) {
+    delete keranjang[id];
+  } else {
+    keranjang[id] = berikutnya;
+  }
+
+  renderKeranjang();
+}
+
+function hapusProduk(id) {
+  delete keranjang[id];
+  renderKeranjang();
+}
+
+function renderKeranjang() {
+  const itemTerpilih = produk.filter(p => (keranjang[p.id] || 0) > 0);
+  const jumlahItem = itemTerpilih.reduce(
+    (sum, p) => sum + keranjang[p.id], 0
+  );
+  const total = itemTerpilih.reduce(
+    (sum, p) => sum + p.harga * keranjang[p.id], 0
+  );
+
+  produk.forEach(p => {
+    const el = document.getElementById("qty-" + p.id);
+    if (el) el.textContent = keranjang[p.id] || 0;
+  });
+
+  document.getElementById("cart-count").textContent = jumlahItem;
+  document.getElementById("total").textContent = rupiah(total);
+
+  const wadah = document.getElementById("cart-items");
+
+  if (itemTerpilih.length === 0) {
+    wadah.innerHTML = '<div class="cart-empty">Keranjang masih kosong. Silakan pilih menu dahulu.</div>';
+  } else {
+    wadah.innerHTML = itemTerpilih.map(p => `
+      <div class="cart-item">
+        <div>
+          <strong>${p.nama}</strong>
+          <small>${keranjang[p.id]} × ${rupiah(p.harga)}</small>
+        </div>
+        <div style="text-align:right">
+          <strong>${rupiah(p.harga * keranjang[p.id])}</strong><br>
+          <button class="remove" type="button"
+            onclick="hapusProduk(${p.id})">Hapus</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("checkout").disabled = jumlahItem === 0;
+}
+
+const jenis = document.getElementById("jenis");
+const alamatField = document.getElementById("alamat-field");
+const alamat = document.getElementById("alamat");
+
+function aturAlamat() {
+  const perluAlamat = jenis.value === "Diantar";
+  alamatField.hidden = !perluAlamat;
+  alamat.required = perluAlamat;
+}
+jenis.addEventListener("change", aturAlamat);
+
+document.getElementById("checkout").addEventListener("click", function() {
+  const nama = document.getElementById("nama").value.trim();
+  const catatan = document.getElementById("catatan").value.trim();
+  const jenisPesanan = jenis.value;
+  const alamatPesanan = alamat.value.trim();
+
+  if (!nama) {
+    alert("Silakan isi nama pemesan terlebih dahulu.");
+    document.getElementById("nama").focus();
+    return;
+  }
+
+  if (jenisPesanan === "Diantar" && !alamatPesanan) {
+    alert("Silakan isi alamat pengantaran.");
+    alamat.focus();
+    return;
+  }
+
+  const itemTerpilih = produk.filter(p => (keranjang[p.id] || 0) > 0);
+
+  if (itemTerpilih.length === 0) {
+    alert("Keranjang masih kosong.");
+    return;
+  }
+
+  const total = itemTerpilih.reduce(
+    (sum, p) => sum + p.harga * keranjang[p.id], 0
+  );
+
+  let pesan = "HALO ANI BOHAY 🍗\n";
+  pesan += "Saya ingin memesan:\n\n";
+
+  itemTerpilih.forEach((p, i) => {
+    pesan += `${i + 1}. ${p.nama} x${keranjang[p.id]}\n`;
+    pesan += `   ${rupiah(p.harga * keranjang[p.id])}\n`;
+  });
+
+  pesan += `\nTOTAL: ${rupiah(total)}\n`;
+  pesan += `Nama: ${nama}\n`;
+  pesan += `Jenis pesanan: ${jenisPesanan}\n`;
+
+  if (jenisPesanan === "Diantar") {
+    pesan += `Alamat: ${alamatPesanan}\n`;
+    pesan += "Ongkir: Mohon konfirmasi\n";
+  }
+
+  pesan += `Catatan: ${catatan || "-"}\n`;
+  pesan += "\nTerima kasih!";
+
+  const url = "https://wa.me/" + nomorWA +
+    "?text=" + encodeURIComponent(pesan);
+
+  window.open(url, "_blank");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderMenu();
+renderKeranjang();
+aturAlamat();
+</script>
+
+</body>
+</html>
